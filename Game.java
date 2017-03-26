@@ -1,7 +1,5 @@
 
-
 import java.util.LinkedList;
-import java.util.Arrays;
 
 public class Game {
 	/*
@@ -16,7 +14,7 @@ public class Game {
 	 */
 	public int tiles[][];
 
-	public int w = 5, h = 5;
+	public int w = 10, h = 10;
 
 	Snake snake;
 
@@ -42,38 +40,35 @@ public class Game {
 			createPrize();
 		}
 
-
-
 		if (checkEnd() && !snake.gotBigger) {
 			reset();
 		}
-
 
 	}
 
 	void updateTiles() {
 
-		if(snake.headx < 0 || snake.heady < 0 || snake.headx >= w || snake.heady >= h){
+		if (snake.headx < 0 || snake.heady < 0 || snake.headx >= w || snake.heady >= h) {
 			reset();
 			return;
 		}
 
-		for(int i = 0; i < w; i++){
-			for(int j = 0; j < h; j++){
+		for (int i = 0; i < w; i++) {
+			for (int j = 0; j < h; j++) {
 				// Remove snake
-				if(tiles[j][i] == 1 || tiles[j][i] == 2){
+				if (tiles[j][i] == 1 || tiles[j][i] == 2) {
 					tiles[j][i] = 0;
 				}
 			}
 		}
 
-		if(tiles[snake.heady][snake.headx] == 3){
+		if (tiles[snake.heady][snake.headx] == 3) {
 			snake.makeBigger();
-			reset();
+			//reset();
 		}
 
-		for(int i = 0; i < snake.tail.length; i++){
-			if(snake.tail[i] != null){
+		for (int i = 0; i < snake.tail.length; i++) {
+			if (snake.tail[i] != null) {
 				Point p = snake.tail[i];
 				tiles[p.y][p.x] = 1;
 			}
@@ -105,6 +100,7 @@ public class Game {
 	}
 
 	boolean debug = false;
+
 	void createPrize() {
 		LinkedList<int[]> empty = new LinkedList<>();
 		for (int i = 0; i < tiles.length; i++) {
@@ -114,11 +110,11 @@ public class Game {
 			}
 		}
 		int[] r = empty.get((int) (Math.random() * empty.size()));
-		//tiles[r[0]][r[1]] = 3;
-		tiles[4][4] = 3; //TODO remove
+		tiles[r[0]][r[1]] = 3;
+		//tiles[8][8] = 3; //TODO remove
 	}
 
-	public Point prizeLocation(){
+	public Point prizeLocation() {
 		for (int i = 0; i < tiles.length; i++) {
 			for (int j = 0; j < tiles[0].length; j++) {
 				if (tiles[i][j] == 3)

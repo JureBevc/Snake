@@ -1,5 +1,4 @@
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
@@ -36,7 +35,7 @@ public class Main extends Canvas implements Runnable {
 		long time = 0;
 		while (true) {
 			long td = System.nanoTime() - time;
-			if (td >= 1000000000/2 || !Input.anyKey) {
+			if (td >= 1000000000 || !Input.anyKey) {
 				time = System.nanoTime();
 				update();
 				render();
